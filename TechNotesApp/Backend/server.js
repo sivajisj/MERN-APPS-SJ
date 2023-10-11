@@ -40,8 +40,6 @@ app.use('/', require('./routes/root'));
 
 app.use('/users', require('./routes/userRoutes'))
 
-// Error Handler should come right after route handlers
-app.use(errorHandler);
 
 // 404 handler
 app.use((req, res, next) => {
@@ -49,6 +47,9 @@ app.use((req, res, next) => {
     err.status = 404;
     next(err);
 });
+
+// Error Handler should come right after route handlers
+app.use(errorHandler);
 
 // Centralized error-handling middleware
 app.use((err, req, res, next) => {
