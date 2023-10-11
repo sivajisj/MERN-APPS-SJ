@@ -38,6 +38,8 @@ app.use(express.static('public'));
 // Root route
 app.use('/', require('./routes/root'));
 
+app.use('/users', require('./routes/userRoutes'))
+
 // Error Handler should come right after route handlers
 app.use(errorHandler);
 
