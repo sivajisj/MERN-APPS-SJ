@@ -29,8 +29,6 @@ app.use(cookieParser())
 
 
 
-
-
 // Middleware for serving static files
 app.use(express.static('public'));
 
