@@ -8,10 +8,10 @@ import {
 import { apiSlice } from "../../app/api/apiSlice";
 
 // Initializing an entity adapter for easier data normalization and manipulation
-const useAdapter = createSelector({})
+const usersAdapter = createSelector({})
 
 // Defining the initial state of this slice using the adapter
-const initialState = useAdapter.getInitialState()
+const initialState = usersAdapter.getInitialState()
 
 // Extending the original apiSlice with a new endpoint to handle fetching users
 export const usersApiSlice = apiSlice.injectEndpoints({
