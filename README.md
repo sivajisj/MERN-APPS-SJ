@@ -1,4 +1,4 @@
-# MERN Applications by Sivaji
+# MERN Applications by Sivaji@sj
 
 Welcome to my collection of MERN (MongoDB, Express.js, React, Node.js) applications. Each project in this repository showcases a specific use case, leveraging the power and flexibility of the MERN stack.
 
