@@ -38,7 +38,7 @@ npm install
 
 ```bash
 
-npm start
+npm run dev
 ```
 (Repeat these steps or specify project-specific instructions if necessary.)
 
