@@ -1,3 +1,6 @@
+*{
+  box-sizing: border-box;
+}
 body {
   color: #333;
   font-family: Arial, sans-serif; /* Just for a default font */
@@ -105,4 +108,55 @@ kbd {
   margin :10px 0px;
   font-size:12px;
   line-height :1.4rem;
+}
+
+form.login, form.register {
+  max-width: 400px;
+  margin: 50px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9; /* Soft background color */
+}
+
+input {
+  display: block;
+  margin-bottom: 15px;
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus effect */
+
+  /* Enhancing the focus effect */
+  &:focus {
+      border-color: #007BFF;  /* Change this to your theme color */
+      box-shadow: 0 0 5px rgba(0,123,255, 0.5);
+      outline: none;
+  }
+}
+
+button {
+  width: 100%;
+  display: block;
+  background-color: #007BFF;  /* Change this to your theme color */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;  /* Smooth transition for hover effect */
+
+  /* Hover effect */
+  &:hover {
+      background-color: #0056b3; /* Slightly darker shade for hover */
+  }
+}
+
+form h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 24px; /* Adjust the size as needed */
+  color: #333;
 }
