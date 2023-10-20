@@ -1,42 +1,105 @@
-body{
+body {
   color: #333;
+  font-family: Arial, sans-serif; /* Just for a default font */
 }
 
-main{
+main {
   padding: 10px;
-  max-width: 500px;
+  max-width: 800px; /* Increased to allow for better visualization of side-by-side layout */
   margin: 0 auto;
 }
 
-header{
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 50px;
+img {
+  max-width: 100%;
 }
 
-header a{
+header {
+  display: flex;
+  justify-content: space-between;
+ margin-bottom:40px;
+ margin-top:30px;
+}
+
+header a {
   color: inherit;
   text-decoration: none;
   font-size: 22px;
 }
-header nav a{
+
+header nav a {
   color: inherit;
   text-decoration: none;
   font-size: 18px;
+  margin-left: 20px; /* Space between nav items */
 }
 
-header a.logo{
+header a.logo {
   font-weight: bold;
 }
-kbd{
+
+kbd {
   background-color: black;
   color: bisque;
 }
 
-header nav{
-gap: 15px;
+/* General and Mobile Styles */
+
+.entry {
   display: flex;
+  flex-direction: column;
+  align-items: center; /* This centers the image and text divs on mobile */
+  margin-bottom: 20px; /* Spacing between entries */
 }
-.post{
-  width: 400px;
+
+.image, .text {
+  width: 100%; /* Ensures they take up the full width on mobile */
+  max-width: 100%;
+  box-sizing: border-box; /* To account for any paddings or borders */
+}
+
+.post-image {
+  width: 100%;
+  height: auto; /* Maintain image aspect ratio */
+}
+
+.text {
+  padding: 10px 0; /* Some vertical spacing for text content */
+}
+
+
+/* Desktop and Large Screens Styles */
+
+@media (min-width: 768px) {
+  .entry {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start; /* This will align the image and text divs to the top on larger screens */
+  }
+  
+  .image {
+    flex: 0 0 45%; /* takes up 45% of the parent container width */
+    margin-right: 5%; /* Spacing between image and text */
+  }
+  
+  .text {
+    flex: 1; /* takes up remaining space */
+    padding: 0; /* Remove mobile padding */
+  }
+}
+
+.info{
+  margin:6px 0;
+  color:#888;
+  font-size: 0.7rem;
+  font-weight:bold;
+  display: flex;
+  gap:10px;
+}
+.author{
+  color:#333;
+}
+.summary{
+  margin :10px 0px;
+  font-size:12px;
+  line-height :1.4rem;
 }
