@@ -12,6 +12,9 @@ main {
 img {
   max-width: 100%;
 }
+.logo{
+  border: 2px solid black;
+}
 
 header {
   display: flex;
