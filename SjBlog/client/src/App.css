@@ -1,0 +1,42 @@
+body{
+  color: #333;
+}
+
+main{
+  padding: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+header a{
+  color: inherit;
+  text-decoration: none;
+  font-size: 22px;
+}
+header nav a{
+  color: inherit;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+header a.logo{
+  font-weight: bold;
+}
+kbd{
+  background-color: black;
+  color: bisque;
+}
+
+header nav{
+gap: 15px;
+  display: flex;
+}
+.post{
+  width: 400px;
+}
