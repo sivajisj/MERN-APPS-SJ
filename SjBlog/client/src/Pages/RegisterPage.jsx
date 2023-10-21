@@ -7,12 +7,18 @@ const RegisterPage = () => {
   
   async function register(ev){
     ev.preventDefault();
-    await fetch('https://5000-sivajisj-mernappssj-yla1k59cxe6.ws-us105.gitpod.io',{
+    const response = await fetch('https://5000-sivajisj-mernappssj-yla1k59cxe6.ws-us105.gitpod.io/register',{
       method:'POST',
       body:JSON.stringify({username,password}),
       headers: {'Content-Type':'application/json'},
     })
+   if(response.status === 200){
 
+    alert('registration success')
+   }else{
+    alert('registration failed')
+
+   }
   }
 
   return (
@@ -23,7 +29,7 @@ const RegisterPage = () => {
          />
          <input type='password' placeholder='password' value={password}
          onChange={ev => setPassword(ev.target.value)} />
-         <button type='submit'>Register</button>
+         <button >Register</button>
     </form>
   )
 }
