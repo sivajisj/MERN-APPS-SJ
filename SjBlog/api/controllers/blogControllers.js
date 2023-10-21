@@ -40,4 +40,18 @@ const login = async(req,res)=>{
  }
 }
 
-module.exports = {register,login}
+const profile = (req, res)=> {
+  const {token} = req.cookies;
+  jwt.verify(token , secret , {},(err, info) => {
+    if(err) throw err;
+    console.log(info);
+    res.json(info)
+  })
+  res.status(200).json({cookies :req.cookies,profile})
+}
+
+const logout = (req,res)=>{
+  res.cookie('token','').json('logout')
+}
+
+module.exports = {register,login,profile,logout}
