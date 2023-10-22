@@ -1,6 +1,8 @@
-const User = require('../modes/User')
+const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+
+
 
 const salt = bcrypt.genSaltSync(10)
 const secret = 'asdfghjk0765re2tygwdcvetg4twrecw'
@@ -42,6 +44,8 @@ const login = async(req,res)=>{
  }
 }
 
+
+
 const profile = (req, res)=> {
   const {token} = req.cookies;
   jwt.verify(token , secret , {},(err, info) => {
@@ -55,5 +59,6 @@ const profile = (req, res)=> {
 const logout = (req,res)=>{
   res.cookie('token','').json('logout')
 }
+const Post =  
 
 module.exports = {register,login,profile,logout}
