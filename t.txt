@@ -1,0 +1,177 @@
+header.jsx :
+
+import React, { useEffect } from 'react'
+import { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { UserContext } from './UserContext'
+
+
+const Header = () => {
+
+  const {setUserInfo,userInfo} = useContext(UserContext)
+  useEffect(()=>{ 
+    fetch('https://5000-sivajisj-mernappssj-yla1k59cxe6.ws-us105.gitpod.io/profile',{
+      credentials:'include',
+    }).then(response =>{
+      response.json().then(userInfo =>{
+        setUserInfo(userInfo)
+      })
+    })
+  },[])
+
+  function logout(){
+    event.preventDefault();
+        fetch('https://5000-sivajisj-mernappssj-yla1k59cxe6.ws-us105.gitpod.io/logout',{
+          credentials :'include',
+          method : 'POST'
+        })
+        setUserInfo(null)
+  }   
+
+  const username = userInfo?.username;
+  console.log(username)
+  return (
+   <>
+     <header>
+      <Link to="/" className='logo'><kbd>SJ</kbd>Blog</Link>
+      <nav>
+        {username && (
+          <>
+          <Link to='/create' >Create new Post</Link>
+          <a href="" onClick={logout}>Logout</a>
+          </>
+        )}
+        {!username && (
+          <>
+          <Link to="/login">login</Link>
+         
+        <Link to="/register">Register</Link>
+          </>
+        )}
+        
+      </nav>
+    </header>
+   </>
+  )
+}
+
+export default Header
+
+import { createContext,useState } from "react";
+
+export const UserContext = createContext({})
+
+export function UserContextProvider({children}){
+    const [userInfo ,setUserInfo] = useState({})
+    return (
+        <UserContext.Provider value={{userInfo ,setUserInfo}}>
+             {children}
+        </UserContext.Provider>
+    )
+}
+
+const User = require('../modes/User')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+
+const salt = bcrypt.genSaltSync(10)
+const secret = 'asdfghjk0765re2tygwdcvetg4twrecw'
+
+const register = async(req,res)=>{
+    const {username , password} = req.body
+       
+      console.log(username+ " : "+ password);
+      try {
+        const userDoc = await User.create({
+          username ,
+          password : bcrypt.hashSync(password,salt) ,
+        
+        })
+        console.log(userDoc);
+        res.json(userDoc)
+
+      } catch (error) {
+        res.status(400).json(error)
+        console.log(error);
+      }
+}
+
+
+const login = async(req,res)=>{
+  const {username , password} = req.body
+ const userDoc =await User.findOne({username})
+ const passOk = bcrypt.compareSync(password, userDoc.password)
+ console.log(passOk);
+ if(passOk){
+   jwt.sign({username,id:userDoc._id},secret, {}, (err,token) =>{
+     if(err) throw err;
+     res.cookie('token',token).json({
+      id : userDoc._id,
+      username,
+     })
+   })
+ }else{
+  res.status(400).json("wrong credentials")
+ }
+}
+
+const profile = (req, res)=> {
+  const {token} = req.cookies;
+  jwt.verify(token , secret , {},(err, info) => {
+    if(err) throw err;
+    console.log(info);
+    res.json(info)
+  })
+  res.status(200).json({cookies :req.cookies,profile})
+}
+
+const logout = (req,res)=>{
+  res.cookie('token','').json('logout')
+}
+
+module.exports = {register,login,profile,logout}
+
+import React, { useContext, useState } from 'react'
+import {Navigate} from 'react-router-dom'
+import '../App.css'
+import { UserContext } from '../components/UserContext'
+const Login = () => {
+  const [username ,setUsername] = useState('')
+  const [password , setPassword] = useState('')
+  const [redirect, setRedirect] = useState('false')
+  const {setUserInfo} = useContext(UserContext)
+
+  async function login(ev){
+    ev.preventDefault()
+    const response = await fetch('https://5000-sivajisj-mernappssj-yla1k59cxe6.ws-us105.gitpod.io/login',{
+      method: 'POST',
+      body : JSON.stringify({username,password}),
+     headers : {"Content-Type" : "application/json"},
+     credentials: 'include',
+    })
+    console.log(response);
+    if(response.ok){
+   
+      setRedirect(true)
+    }else{
+      alert("wrong credentials")
+    }
+  }
+  
+  if(redirect){
+    return <Navigate to={'/'}/>
+  }
+  return (
+    <form className='login' onSubmit={login}>
+      <h1>Login</h1>
+         <input type='text' placeholder='username'
+          value={username} onChange={ev=>setUsername(ev.target.value)} />
+
+         <input type='password' placeholder='password'
+          value={password} onChange={ev=> setPassword(ev.target.value)}  />
+         <button type='submit'>Login</button>
+    </form>
+  )
+}
+
+export default Login
