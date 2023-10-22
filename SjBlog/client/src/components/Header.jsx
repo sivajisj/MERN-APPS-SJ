@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FaPlus, FaSignOutAlt } from "react-icons/fa";
 import { UserContext } from '../UserContext'
 
 const Header = () => {
@@ -35,8 +36,12 @@ const Header = () => {
       <nav>
         {username && (
           <>
-          <Link to='/create' >Create new Post</Link>
-          <a href="" onClick={logout}>Logout</a>
+           <Link to='/create'>
+                            <FaPlus /> Create new Post
+                        </Link>
+                        <a href="" onClick={logout}>
+                            <FaSignOutAlt /> Logout
+                        </a>
           </>
         )}
         {!username && (

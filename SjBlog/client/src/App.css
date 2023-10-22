@@ -154,7 +154,7 @@ button {
   }
 }
 
-form h1 {
+form.login h1 , form.register h1 {
   text-align: center;
   margin-bottom: 25px;
   font-size: 24px; /* Adjust the size as needed */
