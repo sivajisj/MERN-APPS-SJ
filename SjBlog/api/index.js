@@ -10,10 +10,13 @@ const multer = require('multer');
 const fs = require('fs')
 const upploadMiddleware = multer({dest :'uploads/'})
 
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 
 const PORT = process.env.PORT || 5500
 const url = process.env.MONGO_URI
+const secret = 'asdfghjk0765re2tygwdcvetg4twrecw'
 
 app.use(cors({
     origin: 'https://5173-sivajisj-mernappssj-yla1k59cxe6.ws-us105.gitpod.io',
@@ -23,6 +26,7 @@ app.use(cors({
     exposedHeaders: ["Set-Cookie"]
 }));app.use(express.json())
 app.use(cookieParser())
+app.use('/uploads',express.static(__dirname+ '/uploads'))
 
  mongoose.connect(url)
  console.log("connected to DB");
@@ -39,18 +43,36 @@ app.post('/post', upploadMiddleware.single('file'),async (req, res) => {
     const ext = parts[parts.length -1 ]
     const newPath = path+"."+ext
     fs.renameSync(path , newPath)
-    const {title,summary , content} = req.body
-    const postDocument = await Post.create({
+
+    const {token} = req.cookies;
+    jwt.verify(token , secret , {},async(err, info) => {
+        if(err) throw err;
+        const {title,summary , content} = req.body
+        const postDocument = await Post.create({
         title,
         summary,
         content,
         cover:newPath,
+        author : info.id,
     })
-  
-  
+
     res.json(postDocument); 
+    
+        
+      })
+
+    
+  
+  
+    
 });
-// app.post('/register',(req,res)=>{
-//     res.json('test ok')
-// })
+
+app.get('/post', async (req, res) => {
+    const posts = await Post.find()
+        .populate('author', ['username'])
+        .sort({ createdAt: -1 })
+        .limit(20);
+    res.json(posts);
+});
+
 app.listen(PORT, ()=> console.log("server listening on port : " + PORT))
