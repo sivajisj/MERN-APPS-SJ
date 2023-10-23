@@ -20,8 +20,10 @@ const CreatePost = () => {
       const response = await fetch('https://5000-sivajisj-mernappssj-yla1k59cxe6.ws-us105.gitpod.io/post',{
         method: 'POST',
         body :data
-    
        })
+      if(response.ok){
+        
+      }
     }
    
   return (
