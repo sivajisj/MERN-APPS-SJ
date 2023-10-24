@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Navigate } from 'react-router-dom';
-import ReactQuill from 'react-quill'
-import {modules, formats} from '../components/Features'
-import 'react-quill/dist/quill.snow.css'
+import Editor from './Editor'
+
 const CreatePost = () => {
     const [title , setTitle] = useState('')
     const [summary, setSummary] = useState('')
@@ -35,14 +34,14 @@ const CreatePost = () => {
   return (
    
     <form enctype="multipart/form-data" onSubmit={createNewPost}>
+      <h1>Creating Post</h1>
         <input type="title" placeholder='Title' value={title} onChange={e =>setTitle(e.target.value)} />
         <input type="summary" placeholder='Summary' value={summary} onChange={e => setSummary(e.target.value)} />
         <input type="file" name="file" onChange={e => setFiles(Array.from(e.target.files))}  />
         
-        <ReactQuill 
-    value={content}  onChange={newVal =>setContent(newVal)}
-    modules={modules}  formats={formats}
-/>
+   
+
+       <Editor  value={content} onChange={setContent}  />
         <button type='submit' style={{marginTop: '15px'}}>Create Post</button>
 
     </form>

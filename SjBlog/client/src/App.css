@@ -206,14 +206,47 @@ div.post-page .author{
   font-size: 15px;
   font-weight: bold;
   color: #0834ab;
-text-decoration: underline;
+/* text-decoration: underline; */
 }
-div.post-page .author a{
 
-}
 div.post-page .author .icon{
   margin-left: 10px;
 }
 .entries{
   background-color: #f8f4f4;
 }
+
+.custom-class {
+  margin-right: 5px;
+}
+
+.editRow{
+  text-align: right;
+  font-size: 20px;
+}
+
+.editRow {
+  text-align: right;  /* align the content to the right */
+  padding: 10px;      /* some padding to ensure the element looks nice */
+}
+
+.editRow a {
+  display: inline-flex;        /* to ensure icon and text align nicely */
+  align-items: center;         /* vertical alignment of icon and text */
+  background-color: #073958;  /* change to your desired button color */
+  color: white;                /* text color */
+  padding: 10px 15px;         /* top-bottom, left-right */
+  border-radius: 5px;         /* rounded corners */
+  text-decoration: none;      /* remove underline from link */
+  transition: background-color 0.3s, transform 0.3s; /* smooth transition for hover effects */
+}
+
+.editRow a:hover {
+  background-color: #2980b9;  /* slightly darker shade for hover */
+  transform: scale(1.05);     /* subtle grow effect on hover */
+}
+
+.custom-class {
+  margin-right: 5px;          /* space between the icon and the text */
+}
+

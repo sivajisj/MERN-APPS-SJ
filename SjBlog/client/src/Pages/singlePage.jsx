@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
+import { UserContext } from '../UserContext';
+import { FaEdit } from 'react-icons/fa';
 
 
 const SinglePage = () => {
     const [postInfo, setPostInfo] = useState(null);
     const { id } = useParams();
+    const {userInfo} = useContext(UserContext)
  
 
     useEffect(() => {
@@ -47,11 +50,18 @@ const SinglePage = () => {
 <div>
   {postInfo && <time>{formattedDate}</time>} 
   <div className="icon-wrapper author">
-                          posted by  <FaUser className="icon" /> {/* Person Icon */}
-                            <a id="sj" className="">@{postInfo.author.username}</a>
-                        </div>
-</div>
-   
+          posted by  <FaUser className="icon" /> {/* Person Icon */}
+            <a id="sj" className="">@{postInfo.author.username}</a>
+        </div>
+  </div>
+   {userInfo.id === postInfo.author._id && (
+      <div className='editRow'>
+            <Link to={`/edit/${postInfo._id}`}>
+              <FaEdit size={20} color="white" className="custom-class" />
+              Edit this Post
+              </Link>
+      </div>
+   )}
  
   <div className='image' >
   {postInfo && 
