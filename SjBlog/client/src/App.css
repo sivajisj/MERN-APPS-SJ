@@ -163,3 +163,57 @@ form.login h1 , form.register h1 {
   font-size: 24px; /* Adjust the size as needed */
   color: #333;
 }
+
+div.post-page div.image{
+  max-height:300px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* Centers children horizontally */
+  justify-content: center; /* Centers children vertically */
+  overflow: hidden;
+}
+
+div.post-page div.image img{
+  object-fit: cover;
+  object-position: center center;
+  max-width: 100%;  /* Ensure it doesn't exceed the container's width */
+  max-height: 80vh;  /* Allow some viewport height for other elements */
+  object-fit: contain;  /* Ensure aspect ratio of the image is maintained */
+}
+ 
+div.post-page a#sj{
+  text-decoration: underline;
+  color: #333;
+}
+
+div.post-page h1{
+  text-align: center;
+  margin: 20px 0 20px;
+}
+
+div.post-page time{
+  text-align: center;
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  color: #536491;
+}
+div.post-page .author{
+  text-align: center;
+  margin-bottom:20px;
+  margin-top: 5px;
+  display: block;
+  font-size: 15px;
+  font-weight: bold;
+  color: #0834ab;
+text-decoration: underline;
+}
+div.post-page .author a{
+
+}
+div.post-page .author .icon{
+  margin-left: 10px;
+}
+.entries{
+  background-color: #f8f4f4;
+}
