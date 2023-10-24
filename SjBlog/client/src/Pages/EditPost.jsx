@@ -22,6 +22,7 @@ const EditPost = () => {
         setTitle(postInfo.title)
         setContent(postInfo.content)
         setSummary(postInfo.summary)
+        
        
         
 
@@ -35,6 +36,8 @@ const EditPost = () => {
     data.set('title',title)
     data.set('summary',summary)
     data.set('content',content)
+    data.set('id',id)
+    // data.set('file',files[0])
 
     if(files?.[0]){
       data.set('file',files?.[0])
@@ -44,20 +47,24 @@ const EditPost = () => {
 
 
     e.preventDefault();
-    const response = await fetch('https://5000-sivajisj-mernappssj-yla1k59cxe6.ws-us105.gitpod.io/post',{
+    const response = await fetch('https://5000-sivajisj-mernappssj-yla1k59cxe6.ws-us105.gitpod.io/post/'+id,{
       method: 'PUT',
       body :data,
-      credentials:'include'
+      credentials: 'include'
+
      })
-     setRedirect(true)
+    if(response.ok){
+      setRedirect(true)
+    }
   }
+
 
   if(redirect){
     return <Navigate to={`/post/${id}`}/>
    }
   return (
    
-    <form enctype="multipart/form-data" onSubmit={updatePost}>
+<form encType="multipart/form-data" onSubmit={updatePost}>
             <h1>Editing Post</h1>
 
         <input type="title" placeholder='Title' value={title} onChange={e =>setTitle(e.target.value)} />

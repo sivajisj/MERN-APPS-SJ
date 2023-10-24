@@ -33,7 +33,7 @@ const CreatePost = () => {
    }
   return (
    
-    <form enctype="multipart/form-data" onSubmit={createNewPost}>
+    <form encType="multipart/form-data" onSubmit={createNewPost}>
       <h1>Creating Post</h1>
         <input type="title" placeholder='Title' value={title} onChange={e =>setTitle(e.target.value)} />
         <input type="summary" placeholder='Summary' value={summary} onChange={e => setSummary(e.target.value)} />

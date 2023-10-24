@@ -21,7 +21,7 @@ const secret = 'asdfghjk0765re2tygwdcvetg4twrecw'
 app.use(cors({
     origin: 'https://5173-sivajisj-mernappssj-yla1k59cxe6.ws-us105.gitpod.io',
     credentials: true,
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST","PUT"],
     allowedHeaders: ["Content-Type", "Authorization", "Set-Cookie"],
     exposedHeaders: ["Set-Cookie"]
 }));app.use(express.json())
@@ -66,6 +66,41 @@ app.post('/post', upploadMiddleware.single('file'),async (req, res) => {
   
     
 });
+
+app.put('/post/:id',upploadMiddleware.single('file'),async(req,res)=>{
+    let newPath = null
+    if (req.file) {
+        const {originalname,path} = req.file
+        const parts = originalname.split('.')
+        const ext = parts[parts.length -1 ]
+        newPath = path+"."+ext
+        fs.renameSync(path , newPath)
+    }
+      
+    console.log(req.file);  // Not req.files
+   const {token} = req.cookies;
+
+   jwt.verify(token , secret , {},async(err, info) => {
+    if(err) throw err;
+    const {id,title,summary , content} = req.body
+    const postDoc = await Post.findById(id)
+    const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id)
+    console.log(isAuthor);
+    // res.json({isAuthor,postDoc,info})
+    if(!isAuthor){
+       return res.status(400).json({msg:"your not the author"})
+        throw '"your not the author"'
+    }
+      const doc = await postDoc.updateOne({
+        title,
+        summary , 
+        content,
+        cover: newPath?newPath : postDoc.cover
+      })
+      res.json(doc); 
+  })
+   
+})
 
 app.get('/post', async (req, res) => {
     const posts = await Post.find()
