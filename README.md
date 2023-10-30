@@ -11,8 +11,8 @@ Welcome to my collection of MERN (MongoDB, Express.js, React, Node.js) applicati
 Below is a list of projects included in this repository:
 
 1. **Project 1** - Brief description of Project 1.
-   - [Live Demo](#)
-   - [Source Code](#)
+   - [Live Demo](#1)
+   - [Source Code](#1)
 
 (Add more projects in a similar fashion as you populate the repository)
 
