@@ -57,6 +57,8 @@ This project is MIT licensed.
 🙌 Acknowledgements
 (List any sources or individuals you'd like to acknowledge here.)
 
+ide : visual studio code
+extension: prettier, live server, file icons
 🚀 Happy Coding! 🚀
 ```bash
 https://gitpod.io/#https://github.com/sivajisj/MERN-APPS-SJ
